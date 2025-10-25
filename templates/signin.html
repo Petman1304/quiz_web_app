@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<h1 style="text-align: center;">Daftar Akun</h1>
+{% endblock%}
+
+{% block body%}
+<form action="/signin/" method="post" style="text-align: center;" id="registrationForm">
+    <p>Username</p>
+    <input type="text" name="username" id="username" required>
+    <p>Password</p>
+    <input type="password" name="password" id="password" required>
+    <p>Konfirmasi Password</p>
+    <input type="password" name="konfirmasi_password" id="konfirmasi_password" required>
+    <br>
+    <span id="passwordError" class="error"></span>
+    <br>
+    {% if errorMessage %}
+    <span>{{ errorMessage }}</span> <br>
+    {% endif %}
+    <button class="submit-btn" id="submit-btn">Daftar</button>
+</form>
+
+<div>Sudah punya akun? <a href="{{ url_for('login') }}">Masuk</a> </div>
+
+<script>
+
+    document.getElementById('registrationForm').addEventListener('input', function(){
+        validateForm();
+    });
+
+    function validateForm(){
+        const password = document.getElementById('password').value;
+        const konfirmasi_password = document.getElementById('konfirmasi_password').value;
+        const submitBtn = document.getElementById('submit-btn');
+        const errorElement = document.getElementById('passwordError');
+
+        let isValid = true;
+
+        if(password === konfirmasi_password){
+            errorElement.textContent = "";
+        }
+        else{
+            errorElement.textContent = "Password tidak sesuai";
+            isValid = false
+        }
+
+        if (isValid){
+            submitBtn.disabled = false;
+        }
+        else{
+            submitBtn.disabled = true;
+        }
+    }
+
+</script>
+
+{% endblock%}
+
+{% block footer %}{% endblock %}
+
+

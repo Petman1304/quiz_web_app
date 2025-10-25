@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% block head %}
+<title style="text-align: center;">Beranda</title>
+{% endblock%}
+
+{% block body%}
+<h1 style="text-align: center;">Beranda</h1>
+
+<h2>
+    {{ day }}, {{ date }}
+</h2>
+
+<form action="/" method="post">
+    <h2>Masukkan Nama Kota</h2>
+    <input type="text" id="kota" name="kota" placeholder="Kota">
+    <button>Submit</button>
+</form>
+
+{% if city|length > 1%}
+<div style="text-align: center;">
+    <h2>Cuaca hari ini di {{ city }}, </h2>
+    <img src="{{ weather_info['current']['icon'] }}" alt="weather_info">
+    <h2>{{ weather_info['current']['text'] }}</h2>
+    <p>Temperatur siang hari : {{ weather_info['day_temp'] }} C</p>
+    <p>Temperatur malam hari : {{ weather_info['night_temp'] }} C</p>
+
+    <h3>Perkiraan Cuaca</h3>
+    <table align="center">
+        <tr>
+            <th>Hari ini</th>
+            <th>Besok</th>
+            <th>Lusa</th>
+        </tr>
+        <tr>
+            <td><img src="{{ weather_info['day_1']['icon'] }}" alt=""></td>
+            <td><img src="{{ weather_info['day_2']['icon'] }}" alt=""></td>
+            <td><img src="{{ weather_info['day_3']['icon'] }}" alt=""></td>
+        </tr>
+        <tr>
+            <td>{{ weather_info['day_1']['text'] }}</td>
+            <td>{{ weather_info['day_2']['text'] }}</td>
+            <td>{{ weather_info['day_3']['text'] }}</td>
+        </tr>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock%}
+
+{% block footer %}{% endblock %}
+

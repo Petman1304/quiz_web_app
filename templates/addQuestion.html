@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+{% block head %}
+{% endblock%}
+
+{% block body%}
+<form action="/add_question/" method="post" style="text-align: center;">
+    <label for="">question</label>
+    <input type="text" name="question" id="question"><br>
+    <label for="">option1</label>
+    <input type="text" name="option1" id="option1"><br>
+    <label for="">option2</label>
+    <input type="text" name="option2" id="option2"><br>
+    <label for="">option3</label>
+    <input type="text" name="option3" id="option3"><br>
+    <label for="">option4</label>
+    <input type="text" name="option4" id="option4"><br>
+    <label for="">correct</label>
+    <input type="text" name="correct" id="correct"><br>
+    <button>Submit</button>
+</form>
+{% endblock%}
+
+{% block footer %}{% endblock %}

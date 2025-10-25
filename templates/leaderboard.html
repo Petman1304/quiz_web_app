@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center;">Papan Peringkat Kuis</h1>
+
+<table style="text-align: center;" align="center">
+    <tr>
+        <th>Username</th>
+        <th>Skor</th>
+    </tr>
+
+    {% for score in score_tables %}
+    <tr>
+        <td>{{ score['account_username'] }}</td>
+        <td>{{ score['score'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+
+{% block footer%}{% endblock %}

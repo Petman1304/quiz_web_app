@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+
+{% block head %}
+{% endblock%}
+
+{% block body%}
+
+{% if 'username' in session %}
+<div id="quiz_header" class="quiz_header" style="text-align: center;">
+    <H1>Kuis Pengembangan AI dalam Python</H1>
+    <button id="start-btn" style="width: auto; color: aliceblue; background-color: black;"> <h2>Mulai Kuis</h2> </button >
+</div>
+{% else %}
+    <H1>Harus masuk terlebih dahulu untuk memulai kuis</H1>
+{% endif %}
+
+<div id="questions" class="questions" hidden="'true">
+    <form action="/quiz/" method="post">
+        {% for question in quiz %}
+        <fieldset>
+            <legend>{{ question['question_text'] }}</legend>
+            {% for option in question['options']%}
+                <label>
+                    <input type="radio" name="{{ question['id'] }}" value="{{ option }}">
+                    {{ option }}
+                </label><br>
+            {% endfor %}
+        </fieldset>
+        {% endfor %}
+        <br>
+        <button type="submit" id="submit-btn" hidden="true" style="padding-bottom: 50px; width: auto; color: aliceblue; background-color: black;"><h2>Submit</h2></button>
+    </form>
+</div>
+
+{% if total_questions > 0 %}
+<div id="score" style="text-align: center;">
+    <fieldset>
+        <legend><h2>Skor</h2></legend>
+        <label>
+            <h2>{{ score }} / {{ total_questions }}</h2>
+        </label>
+    </fieldset>
+</div>
+{% endif %}
+
+<button id="leaderboard-btn" style="width: auto; color: aliceblue; background-color: black;" onclick="window.location.href='{{ url_for('leaderboard') }}'"> <h2>Papan Peringkat</h2> </button >
+
+
+<script>
+    document.getElementById('start-btn').addEventListener("click", startQuiz);
+
+    function startQuiz(){
+        document.getElementById('start-btn').hidden = true
+        document.getElementById('submit-btn').hidden = false
+        document.getElementById('questions').hidden = false
+        document.getElementById('score').hidden = true
+        document.getElementById('leaderboard-btn').hidden = true
+    }
+
+</script>
+{% endblock%}
+
+{% block footer %}{% endblock %}
